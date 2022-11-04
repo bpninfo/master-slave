@@ -1,4 +1,4 @@
-package com.gerp.dartachalani.config.interceptor.mybatis;
+package  com.info.masterslave.config.mybatis;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
