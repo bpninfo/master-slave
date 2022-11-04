@@ -1,18 +1,21 @@
 package com.info.masterslave.service;
 
 
+import com.info.masterslave.dto.StudentDto;
 import com.info.masterslave.model.Student;
 
 import java.util.List;
 
 public interface StudentService {
 
-    Student save(Student student);
+    StudentDto save(StudentDto student);
 
-    Student update(Student student);
+    StudentDto update(StudentDto student);
 
-    Student getById(Long id);
+    StudentDto getById(Long id);
 
-    List<Student> getAll();
+    List<StudentDto> getAll();
+
+    Student getStudentByMapper(Long id);
 
 }

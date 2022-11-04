@@ -26,3 +26,10 @@ spring:
       pool-name: ReadHikariPool
 server:
   port: 9000
+
+mybatis-plus:
+  configuration:
+    #  specification If the database field is order_id, then the entity field should be written as orderId
+    map-underscore-to-camel-case: true
+  #Mybatis mapper.xml file location
+  mapper-locations: classpath*:**/sql/*.xml

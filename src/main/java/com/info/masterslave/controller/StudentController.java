@@ -1,5 +1,6 @@
 package com.info.masterslave.controller;
 
+import com.info.masterslave.dto.StudentDto;
 import com.info.masterslave.model.Student;
 import com.info.masterslave.service.StudentService;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +17,12 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Student student){
+    public ResponseEntity<?> save(@RequestBody StudentDto student){
         return ResponseEntity.ok(studentService.save(student));
     }
 
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody Student student){
+    public ResponseEntity<?> update(@RequestBody StudentDto student){
         return ResponseEntity.ok(studentService.update(student));
     }
 
@@ -33,5 +34,10 @@ public class StudentController {
     @GetMapping("/all")
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok(studentService.getAll());
+    }
+
+    @GetMapping("/by/mapper/{id}")
+    public ResponseEntity<?> getStudentByMapper(@PathVariable Long id){
+        return ResponseEntity.ok(studentService.getStudentByMapper(id));
     }
 }

@@ -1,6 +1,10 @@
 package com.info.masterslave.config;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.apache.ibatis.mapping.Environment;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +29,7 @@ import javax.persistence.EntityManagerFactory;
 public class DataSourceConfigRead extends HikariConfigRead {
 
     public final static String MODEL_PACKAGE = "com.info.masterslave.model";
+    public final static String MAPPER_PACKAGE = "com.info.masterslave.mapper";
 
     public DataSourceConfigRead(HikariReadProperties hikariReadProperties) {
         super(hikariReadProperties);
@@ -51,5 +56,14 @@ public class DataSourceConfigRead extends HikariConfigRead {
     @Bean
     public PlatformTransactionManager transactionManagerRead(EntityManagerFactory entityManagerFactoryRead) {
         return new JpaTransactionManager(entityManagerFactoryRead);
+    }
+
+    // this is for mybatis mapper
+    @Bean
+    public SqlSessionFactory sessionFactory() {
+        Environment env = new Environment("dev", new JdbcTransactionFactory(), dataSourceRead());
+        org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration(env);
+        config.addMappers("com.info.masterslave.mapper");
+        return new SqlSessionFactoryBuilder().build(config);
     }
 }
