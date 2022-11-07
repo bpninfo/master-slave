@@ -10,7 +10,7 @@ public interface StudentService {
 
     StudentDto save(StudentDto student);
 
-    StudentDto update(StudentDto student);
+    StudentDto update(Long id, StudentDto student);
 
     StudentDto getById(Long id);
 

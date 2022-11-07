@@ -1,5 +1,6 @@
 package com.info.masterslave.controller;
 
+import com.info.masterslave.dto.TeacherDto;
 import com.info.masterslave.model.Teacher;
 import com.info.masterslave.service.TeacherService;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +17,13 @@ public class TeacherController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Teacher teacher){
+    public ResponseEntity<?> save(@RequestBody TeacherDto teacher){
         return ResponseEntity.ok(teacherService.save(teacher));
     }
 
-    @PutMapping
-    public ResponseEntity<?> update(@RequestBody Teacher teacher){
-        return ResponseEntity.ok(teacherService.update(teacher));
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") Long id ,@RequestBody TeacherDto teacher){
+        return ResponseEntity.ok(teacherService.update(id, teacher));
     }
 
     @GetMapping("/{id}")
